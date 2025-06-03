@@ -9,7 +9,7 @@
 import { computed } from "vue"
 import { lastRightPart, combinePaths } from "@servicestack/client"
 
-const baseUrl = "https://github.com/NetCoreTemplates/vue-spa/blob/main"
+const baseUrl = "https://github.com/NetCoreTemplates/vue-spa/blob/main" // TODO: Replace with your own repo when available. Keeping OG reference for attribution & sourcing for now.
 
 const props = defineProps<{
   href: string

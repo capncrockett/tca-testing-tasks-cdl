@@ -17,7 +17,7 @@ import ChartJs from "./components/ChartJs"
 ## Vue Components in Markdown Pages
 
 Thanks to the [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import) plugin, App Components in
-[/src/components](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/components) are automatically imported
+[/src/components](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/components) are automatically imported <!-- TODO: Replace with your own repo URL when available. Keeping OG reference for attribution & sourcing for now. -->
 and can immediately referenced in `*.md` Markdown pages using normal Vue SFC syntax, e.g:
 
 ```tsx
@@ -28,7 +28,7 @@ and can immediately referenced in `*.md` Markdown pages using normal Vue SFC syn
   <GettingStarted template="vue-spa" />
 </div>
 
-Additional Global Components can be registered in [main.ts](https://github.com/NetCoreTemplates/vue-spa/blob/main/src/main.ts)
+Additional Global Components can be registered in [main.ts](https://github.com/NetCoreTemplates/vue-spa/blob/main/src/main.ts) <!-- TODO: Replace with your own repo URL when available. Keeping OG reference for attribution & sourcing for now. -->
 when creating the Vue App where you can register entire Component libraries, Aliases and TypeScript Vue components, e.g
 
 ```ts
@@ -74,9 +74,9 @@ import ChartJs from "./components/ChartJs"
 ```
 
 Which is recommended to use for any components only used in Markdown content, by maintaining them in the relative `./components/` 
-folder to reference components in [/_posts/components/](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components),
+folder to reference components in [/_posts/components/](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components), <!-- TODO: Replace with your own repo URL when available. Keeping OG reference for attribution & sourcing for now. -->
 
-Like the minimal [Hello.vue](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components/Hello.vue):
+Like the minimal [Hello.vue](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components/Hello.vue): <!-- TODO: Replace with your own repo URL when available. Keeping OG reference for attribution & sourcing for now. -->
 
 ```tsx
 <template>
@@ -120,7 +120,7 @@ const count = ref(1)
     <Counter />
 </div>
 
-To components like [Plugin.vue](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components/Plugin.vue) that
+To components like [Plugin.vue](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components/Plugin.vue) that <!-- TODO: Replace with your own repo URL when available. Keeping OG reference for attribution & sourcing for now. -->
 make use of external Vue component libraries:
 
 ```html
@@ -148,7 +148,7 @@ const show = ref(false)
 </div>
 
 Or components that use Ajax to invoke JSON Server APIs like 
-[HelloApi.vue](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components/HelloApi.vue):
+[HelloApi.vue](https://github.com/NetCoreTemplates/vue-spa/tree/main/MyApp.Client/src/_posts/components/HelloApi.vue): <!-- TODO: Replace with your own repo URL when available. Keeping OG reference for attribution & sourcing for now. -->
 
 ```html
 <template>

@@ -48,13 +48,13 @@ implemented in:
 When more capabilities are required and you want a .NET API backend to your Vite Vue or React SPA frontend, 
 you can use one of our integrated .NET 8 SPA templates:
 
- - [vue-spa](https://vue-spa.web-templates.io) - .NET 8 API with Vite Vue SPA frontend
+ - [vue-spa](https://vue-spa.web-templates.io) - .NET 8 API with Vite Vue SPA frontend <!-- TODO: Replace with your own demo URL when available. Keeping OG reference for attribution & sourcing for now. -->
  - [react-spa](https://react-spa.web-templates.io) - .NET 8 API with Vite React SPA frontend
 
 <div class="not-prose mt-8 grid grid-cols-2 gap-4">
-    <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://vue-spa.web-templates.io">
-        <img class="p-2" src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/vue-spa.png" />
-        <div class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold group-hover:bg-indigo-700 group-hover:text-white text-center py-2">vue-spa.web-templates.io</div>
+    <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://vue-spa.web-templates.io"> <!-- TODO: Replace with your own demo URL when available. Keeping OG reference for attribution & sourcing for now. -->
+        <img class="p-2" src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/vue-spa.png" /> <!-- TODO: Replace with your own asset when available. Keeping OG reference for attribution & sourcing for now. -->
+        <div class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold group-hover:bg-indigo-700 group-hover:text-white text-center py-2">vue-spa.web-templates.io</div> <!-- TODO: Replace with your own demo URL when available. Keeping OG reference for attribution & sourcing for now. -->
     </a>
     <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://react-spa.web-templates.io">
         <img class="p-2" src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/react-spa.png" />
