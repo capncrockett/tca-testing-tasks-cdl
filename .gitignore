@@ -9,7 +9,12 @@ Thumbs.db
 
 # Environment files
 .env
-.env.*.local
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Dependency directories
 **/node_modules/
@@ -43,7 +48,6 @@ Thumbs.db
 *.suo
 *.user
 *.userosscache
-*.suo
 *.userprefs
 *.dbmdl
 *.jfm
@@ -64,7 +68,6 @@ lerna-debug.log*
 **/TestResults.*/
 **/coverage/
 **/coverage-*/
-**/coverage.*-*/
 **/*.coverage
 **/*.coverage.*
 **/*.cover
@@ -103,3 +106,130 @@ lerna-debug.log*
 
 # Project specific ignores (delegated to project .gitignore files)
 # See individual project .gitignore files for more specific rules
+
+# .NET Core
+## Build results
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+/publish/
+/artifacts/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+*.sln.ide
+*.sln.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.sln.ide
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper/
+*.DotSettings.user
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+.pnpm-store/
+
+# Build outputs
+/dist/
+/dist-ssr/
+/coverage/
+*.tsbuildinfo
+*.mjs
+*.cjs
+*.d.ts
+*.d.ts.map
+
+# Testing
+/TestResults/
+/TestResults.*/
+/coverage-*/
+*.coverage
+*.coverage.*
+*.cover
+*.cover.*
+
+# Next.js
+.next/
+out/
+
+# Nuxt.js
+.nuxt/
+.nuxt-dist/
+
+# Gatsby
+public/
+
+# Serverless
+.serverless/
+
+# FuseBox
+.fusebox/
+
+# DynamoDB Local
+.dynamodb/
+
+# TernJS
+.tern-port
+
+# NCrunch
+_NCrunch_*
+*.ncrunch*
+*.ncrunchsolution
+*.ncrunchproject
+*.ncrunchtest
+
+# DotCover
+*.dotCover
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Local development settings
+launchSettings.json
+appsettings.Development.json
+appsettings.local.json
+
+# Python (if any)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development server
+.local-chromium/
+
+# ESLint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history

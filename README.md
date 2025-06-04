@@ -1,66 +1,84 @@
 # TCA Testing Tasks
 
-A Vue.js and .NET 8.0 application for managing testing tasks.
-
-A repository rehosted from [vue-spa](https://github.com/NetCoreTemplates/vue-spa) used as a Vue and .NET template for AI Code Assistant.
+A Vue.js and .NET 8.0 application for managing testing tasks, designed for Visual Studio on Windows.
 
 ## Development Setup
 
 ### Prerequisites
 
+- Windows OS
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Node.js](https://nodejs.org/) (LTS version recommended)
-- For Windows:
-  - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) with ASP.NET and web development workload
-  - SQL Server LocalDB (included with Visual Studio)
-- For Mac/Linux:
-  - [Visual Studio Code](https://code.visualstudio.com/) or your preferred IDE
-  - SQLite (included with most systems)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) with ASP.NET and web development workload
+- SQL Server LocalDB (included with Visual Studio)
 
 ### Getting Started
 
 1. **Clone the repository**
 
+   **Option 1: Using Git command line**
    ```bash
-   git clone https://github.com/your-org/tca-testing-tasks.git
+   git clone https://github.com/The-Mcorp/tca-testing-tasks.git
    cd tca-testing-tasks
    ```
 
-2. **Install frontend dependencies**
+   **Option 2: Using Visual Studio**
+   - Open Visual Studio 2022
+   - Click "Clone a repository" on the start window
+   - Enter the repository URL: `https://github.com/The-Mcorp/tca-testing-tasks.git`
+   - Choose a local path and click "Clone"
+   - The solution should open automatically after cloning
 
-   ```bash
-   cd ClientApp
-   npm install
-   cd ..
-   ```
+2. **Open the solution in Visual Studio**
+   - Double-click `MyApp.sln` to open the solution (if it didn't open automatically)
+   - Wait for Visual Studio to restore NuGet packages
 
-3. **Run the application**
-   ```bash
-   dotnet watch
-   ```
-   This will:
-   - Start the .NET backend with hot reload
-   - Start the Vite dev server for the frontend
-   - Open the app in your default browser
+3. **Install frontend dependencies**
+   - Open a terminal in Visual Studio (View > Terminal)
+   - Navigate to the ClientApp directory:
+     ```bash
+     cd MyApp.Client
+     ```
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+
+4. **Run the application**
+   - In Visual Studio, ensure the startup project is set to `MyApp`
+   - Select "IIS Express" from the debug target dropdown (next to the Start button)
+   - Press F5 or click the "Start" button to run the application
+   - This will:
+     - Start the .NET backend using IIS Express
+     - Launch the Vite dev server for the frontend
+     - Open the app in your default browser
+
+   **Note on Self-Signed Certificates**:
+   - When using IIS Express, you might see a certificate warning in your browser
+   - To trust the development certificate:
+     1. Click "Continue to this website (not recommended)" in the browser
+     2. Or install the development certificate:
+        - Open Windows Start and search for "Internet Options"
+        - Go to the "Content" tab > "Certificates" button
+        - In the "Trusted Root Certification Authorities" tab, import the certificate from:
+          `%USERPROFILE%\Documents\IISExpress\config\localhost.pfx`
+        - Use the password "password" if prompted
+      3. If all else fails try clicking anywhere on the page and typing "thisisunsafe".
 
 ### Database Setup
 
-The application uses two database systems:
+The application uses SQL Server LocalDB for all database needs:
 
-1. **Application Data (OrmLite with SQLite)**
+- **Application Data (OrmLite with SQL Server LocalDB)**
+  - Used for: Bookings, Coupons, etc.
+  - Automatically created on first run
 
-   - Used for: Bookings, Coupons, etc.
-   - Automatically created at `App_Data/app.db`
-   - For detailed database management instructions, see [App_Data/README.md](MyApp/App_Data/README.md)
-
-2. **Authentication (EF Core)**
-   - **Windows**: Uses SQL Server LocalDB (included with Visual Studio)
-   - **Mac/Linux**: Uses SQLite (no setup required)
+- **Authentication (EF Core with SQL Server LocalDB)**
+  - Used for user authentication and authorization
 
 #### First Run (Automatic Setup)
 
-On first run, the application will attempt to:
-
+On first run, the application will:
 1. Create the databases if they don't exist
 2. Run all necessary migrations
 3. Seed sample data including:
@@ -72,28 +90,12 @@ On first run, the application will attempt to:
 
 If the automatic setup doesn't work, you can manually set up the database:
 
-1. **Navigate to the project directory**:
-
-   ```bash
-   cd /path/to/project/MyApp
+1. **Open Package Manager Console** in Visual Studio (Tools > NuGet Package Manager > Package Manager Console)
+2. **Run migrations**:
+   ```powershell
+   Update-Database
    ```
-
-2. **Create and apply migrations**:
-
-   ```bash
-   # List any pending migrations
-   dotnet ef migrations list
-
-   # If no migrations exist, create one
-   dotnet ef migrations add InitialCreate
-
-   # Apply migrations to create/update the database
-   dotnet ef database update
-   ```
-
-3. **Verify the database**:
-   - On Mac/Linux: An `app.db` file should be created in your project root
-   - The database should contain all necessary tables (AspNetUsers, AspNetRoles, etc.)
+3. **Verify the database** in SQL Server Object Explorer (View > SQL Server Object Explorer)
 
 ### Accessing the Admin UI
 
@@ -104,35 +106,39 @@ If the automatic setup doesn't work, you can manually set up the database:
 
 ### Development Workflow
 
-- **Frontend**: The Vite dev server runs on `https://localhost:5173` with hot module replacement
+- **Frontend**: The Vite dev server runs with hot module replacement
 - **Backend**: The .NET API runs on `https://localhost:5001` (or similar)
 - **API Explorer**: Available at `/swagger`
 
 ### Troubleshooting
 
 1. **Database Issues**
+   - Ensure SQL Server LocalDB is installed (comes with Visual Studio)
+   - If the database isn't created automatically, try running the application as Administrator
+   - To reset the database:
+     - Open SQL Server Object Explorer
+     - Right-click the database and select "Delete"
+     - Restart the application to recreate it
 
-   - **Automatic migration failed**: If the database isn't created automatically, follow the [manual database setup](MyApp/App_Data/README.md) instructions.
-   - **Windows**: Ensure SQL Server LocalDB is installed (comes with Visual Studio)
-   - **Mac/Linux**: Ensure write permissions to the project directory
-
-2. **Reset the Database**
-
-   - **Windows**:
-     - Delete the database using SQL Server Management Studio or run `sqllocaldb delete MSSQLLocalDB`
-     - Delete `App_Data/app.db`
-   - **Mac/Linux**:
-     ```bash
-     # Delete the database file
-     rm -f app.db
-     # Then re-run migrations
-     dotnet ef database update
-     ```
-
-3. **Port Conflicts**
+2. **Port Conflicts**
    - If ports 5001 or 5173 are in use, update the ports in:
      - `Properties/launchSettings.json` (backend)
      - `ClientApp/vite.config.ts` (frontend)
+
+3. **SSL Certificate Errors in Microsoft Edge**
+   - If you see a certificate error, follow these steps:
+     1. In the Edge error page, type `thisisunsafe` (this bypasses the warning for development purposes)
+     2. Or, to permanently trust the development certificate:
+        - Open Windows Start and search for "Manage user certificates"
+        - Navigate to "Trusted Root Certification Authorities" > "Certificates"
+        - Find and delete any existing localhost certificates
+        - In Visual Studio's Solution Explorer (usually on the right side):
+          1. Right-click on the `MyApp` project (not the solution)
+          2. Select "Properties" from the context menu
+          3. In the properties window, go to the "Debug" tab
+          4. Uncheck the "Enable SSL" option
+          5. Save your changes (Ctrl + S)
+          6. Restart the application
 
 ---
 
@@ -142,12 +148,9 @@ If the automatic setup doesn't work, you can manually set up the database:
 tca-testing-tasks/
 ├── MyApp/                     # .NET 8 Backend
 │   ├── App_Data/             # Database files and migrations
-│   │   └── README.md         # Database management guide
 │   ├── wwwroot/              # Static files (auto-populated)
 │   ├── ServiceInterface/     # Service implementations
 │   ├── ServiceModel/         # Request/Response DTOs and types
-│   │   └── Types/            # Shared DTOs and models
-│   │       └── README.md     # DTO documentation
 │   └── Program.cs            # Application entry point
 │
 ├── MyApp.Client/            # Vue 3 Frontend
@@ -157,43 +160,30 @@ tca-testing-tasks/
 │
 ├── MyApp.ServiceInterface/  # Service implementations
 ├── MyApp.ServiceModel/       # DTOs and service contracts
-├── MyApp.Tests/              # Unit and integration tests
-│
-├── .gitignore              # Git ignore rules
-└── README.md                # This file
+└── MyApp.Tests/              # Unit and integration tests
 ```
 
 ### Key Directories
 
 - **MyApp/**: Backend .NET 8 application
-
-  - `App_Data/`: Database files and migrations (see [App_Data/README.md](MyApp/App_Data/README.md))
+  - `App_Data/`: Database files and migrations
   - `wwwroot/`: Static files served by the web server
   - `ServiceInterface/`: Service implementations
-  - `ServiceModel/`: DTOs and service contracts (see [ServiceModel/Types/README.md](MyApp.ServiceModel/Types/README.md))
+  - `ServiceModel/`: DTOs and service contracts
 
-- **MyApp.Client/**: Vue 3 frontend application (see [Client README.md](MyApp.Client/README.md))
-
+- **MyApp.Client/**: Vue 3 frontend application
   - `public/`: Static assets
   - `src/`: Vue components and application code
-
-- **MyApp.ServiceInterface/**: Contains service implementations
-- **MyApp.ServiceModel/**: Shared DTOs and contracts
-- **MyApp.Tests/**: Test projects
 
 ## Development
 
 ### Frontend Development
 
-See the [Client README](MyApp.Client/README.md) for frontend-specific setup and development instructions.
+Frontend development is done using Vue 3 with Vite. The frontend code is located in the `MyApp.Client` directory.
 
 ### Backend Development
 
-See the [Database Management](MyApp/App_Data/README.md) guide for database setup and migrations.
-
-### API Development
-
-For API development, refer to the [ServiceModel Types](MyApp.ServiceModel/Types/README.md) documentation for DTO and contract guidelines.
+The backend is built with .NET 8. The solution can be opened and run directly in Visual Studio.
 
 ## License
 
