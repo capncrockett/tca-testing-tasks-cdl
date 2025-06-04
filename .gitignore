@@ -1,0 +1,105 @@
+# General
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment files
+.env
+.env.*.local
+
+# Dependency directories
+**/node_modules/
+**/bin/
+**/obj/
+**/publish/
+**/out/
+**/artifacts/
+
+# Build results
+**/[Dd]ebug/
+**/[Dd]ebugPublic/
+**/[Rr]elease/
+**/[Rr]eleases/
+**/build/
+**/bld/
+**/x64/
+**/x86/
+**/dist/
+**/dist-ssr/
+**/coverage/
+
+# IDE specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sln.iml
+*.suo
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Test results
+**/TestResults/
+**/TestResults.*/
+**/coverage/
+**/coverage-*/
+**/coverage.*-*/
+**/*.coverage
+**/*.coverage.*
+**/*.cover
+**/*.cover.*
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/*.py.class
+**/*.so
+**/.Python
+**/build/
+**/develop-eggs/
+**/downloads/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/wheels/
+**/share/python-wheels/
+**/*.egg-info/
+**/.installed.cfg
+**/*.egg
+**/MANIFEST
+
+# Local development cache
+.local-chromium/
+
+# Database files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Project specific ignores (delegated to project .gitignore files)
+# See individual project .gitignore files for more specific rules
