@@ -1,13 +1,46 @@
-# .NET Core
-**/[Bb]in/
-**/[Oo]bj/
-**/[Ll]og/
-**/wwwroot/
+# General
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment files
+.env
+.env.*.local
+
+# Dependency directories
+**/node_modules/
+**/bin/
+**/obj/
 **/publish/
 **/out/
+**/artifacts/
 
-# Visual Studio files
-.vs/
+# Build results
+**/[Dd]ebug/
+**/[Dd]ebugPublic/
+**/[Rr]elease/
+**/[Rr]eleases/
+**/build/
+**/bld/
+**/x64/
+**/x86/
+**/dist/
+**/dist-ssr/
+**/coverage/
+
+# IDE specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sln.iml
+*.suo
 *.user
 *.userosscache
 *.suo
@@ -17,125 +50,56 @@
 *.pfx
 *.publishsettings
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-build/
-bld/
-[Bb]in/
-[Oo]bj/
-[Oo]ut/
-msbuild.log
-msbuild.err
-msbuild.wrn
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# .NET Core
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# VS Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# Rider
-.idea/
-*.sln.iml
-
-# User-specific files
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# ReSharper is a .NET coding add-in
-_ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
-
-# NuGet Packages
-*.nupkg
-# The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
-# except build/, which is used as an MSBuild target.
-!**/[Pp]ackages/build/
-# Uncomment if necessary however generally it will be regenerated when needed
-#!**/[Pp]ackages/repositories.config
-# NuGet v3's project.json files produces more ignorable files
-*.nuget.props
-*.nuget.targets
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# Local History for Visual Studio
-.localhistory/
-
-# BeatPulse healthcheck temp database
-healthchecksdb
-
-# Backup folder for Package Reference Convert tool in Visual Studio 2017
-MigrationBackup/
-
-# Ionide (cross platform F# VS Code tools) working folder
-.ionide/
-
-# Fody - auto-generated XML schema
-FodyWeavers.xsd
-FodyWeavers.xsd
-
-# VS Code files for the Visual Studio .NET Core Explorer
-.vscode/vslaunch.json
-
-# Local development settings
-appsettings.Development.json
-appsettings.local.json
-
-# MacOS
-.DS_Store
-
-# Visual Studio Code
-.vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# Test results
+**/TestResults/
+**/TestResults.*/
+**/coverage/
+**/coverage-*/
+**/coverage.*-*/
+**/*.coverage
+**/*.coverage.*
+**/*.cover
+**/*.cover.*
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/*.py.class
+**/*.so
+**/.Python
+**/build/
+**/develop-eggs/
+**/downloads/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/wheels/
+**/share/python-wheels/
+**/*.egg-info/
+**/.installed.cfg
+**/*.egg
+**/MANIFEST
 
 # Local development cache
 .local-chromium/
 
-# Database
-App_Data/*
-!App_Data/.gitkeep
+# Database files
 *.db
 *.db-journal
 *.sqlite
 *.sqlite3
 
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# IDE specific files
-.idea/
-.vscode/
-*.sln.iml
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Project specific ignores (delegated to project .gitignore files)
+# See individual project .gitignore files for more specific rules

@@ -1,0 +1,110 @@
+# .NET Core build outputs
+/bin/
+/obj/
+/publish/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio user-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+
+# VS Code files for the Visual Studio .NET Core Explorer
+.vscode/vslaunch.json
+
+# Local development settings
+appsettings.Development.json
+appsettings.local.json
+
+# Database files
+App_Data/*.db
+App_Data/*.db-journal
+App_Data/*.sqlite
+App_Data/*.sqlite3
+App_Data/jobs/*
+App_Data/requests/*
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Local History for Visual Studio
+.localhistory/
+
+# BeatPulse healthcheck temp database
+healthchecksdb
+
+# Backup folder for Package Reference Convert tool in Visual Studio 2017
+MigrationBackup/
+
+# Ionide (cross platform F# VS Code tools) working folder
+.ionide/
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+FodyWeavers.xsd
+
+# Visual Studio cache/options directory
+.vs/
+
+# Local development environment
+launchSettings.json
+
+# NCrunch
+_NCrunch_*
+*.ncrunch*
+*.ncrunchsolution
+*.ncrunchproject
+*.ncrunchtest
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.sln.ide
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper/
+*.DotSettings.user
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
+# NCover
+*.NCover
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# TFS 2012 Local Workspace
+$tf/
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper/
+*.DotSettings.user
+
+# TeamCity is a build add-in
+_TeamCity*
