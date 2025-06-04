@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,20 @@ services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserC
 
 // Register all services
 services.AddServiceStack(typeof(MyServices).Assembly);
+
+// Configure database based on OS
+var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+if (isWindows)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
+}
+else
+{
+    // Add SQLite package if not already added: dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+}
 
 var app = builder.Build();
 

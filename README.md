@@ -2,107 +2,114 @@
 
 A Vue.js and .NET 8.0 application for managing testing tasks.
 
-A repository rehosted from https://github.com/NetCoreTemplates/vue-spa used as a Vue and .Net template for AI Code Assistant
+A repository rehosted from [vue-spa](https://github.com/NetCoreTemplates/vue-spa) used as a Vue and .NET template for AI Code Assistant.
 
-## Getting Started with Visual Studio
+## Development Setup
 
 ### Prerequisites
 
-- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) (Community edition or higher)
-  - Select these workloads during installation:
-    - ASP.NET and web development
-    - .NET desktop development
-    - Node.js development (or install [Node.js LTS](https://nodejs.org/) separately)
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- For Windows:
+  - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) with ASP.NET and web development workload
+  - SQL Server LocalDB (included with Visual Studio)
+- For Mac/Linux:
+  - [Visual Studio Code](https://code.visualstudio.com/) or your preferred IDE
+  - SQLite (included with most systems)
 
-### Setup Instructions
+### Getting Started
 
 1. **Clone the repository**
 
-   - Open Visual Studio
-   - Click "Clone a repository"
-   - Enter the repository URL: `https://github.com/your-username/tca-testing-tasks.git`
-   - Choose a local path and click "Clone"
+   ```bash
+   git clone https://github.com/your-org/tca-testing-tasks.git
+   cd tca-testing-tasks
+   ```
 
-2. **Restore .NET dependencies**
+2. **Install frontend dependencies**
 
-   - Open the solution file (`tca-testing-tasks.sln`)
-   - Right-click the solution in Solution Explorer
-   - Select "Restore NuGet Packages"
+   ```bash
+   cd ClientApp
+   npm install
+   cd ..
+   ```
 
-3. **Install Node.js dependencies**
+3. **Run the application**
+   ```bash
+   dotnet watch
+   ```
+   This will:
+   - Start the .NET backend with hot reload
+   - Start the Vite dev server for the frontend
+   - Open the app in your default browser
 
-   - Open a terminal in Visual Studio (View > Terminal)
-   - Navigate to the ClientApp directory:
-     ```
-     cd ClientApp
-     ```
-   - Install npm packages:
-     ```
-     npm install
-     ```
+### Database Setup
 
-4. **Configure the application**
+The application uses two database systems:
 
-   - In the `appsettings.json` file, update any connection strings or settings as needed
+1. **Application Data (OrmLite with SQLite)**
 
-5. **Run the application**
-   - In Visual Studio, ensure the startup project is set to the web project
-   - Press F5 or click the "Start" button to run the application
-   - This will:
-     1. Start the .NET backend
-     2. Launch the Vue.js development server
-     3. Open your default browser to `https://localhost:5001`
+   - Used for: Bookings, Coupons, etc.
+   - Automatically created at `App_Data/app.db`
+   - No setup required
+
+2. **Authentication (EF Core)**
+   - **Windows**: Uses SQL Server LocalDB (included with Visual Studio)
+   - **Mac/Linux**: Uses SQLite (no setup required)
+
+#### First Run
+
+On first run, the application will:
+
+1. Create the databases if they don't exist
+2. Run all necessary migrations
+3. Seed sample data including:
+   - Test users (admin@email.com / p@55wOrd)
+   - Sample bookings
+   - Coupon codes (5% to 70% off)
+
+### Accessing the Admin UI
+
+1. Navigate to `/admin-ui/database` in your browser
+2. Log in with admin credentials:
+   - Email: `admin@email.com`
+   - Password: `p@55wOrd`
 
 ### Development Workflow
 
-- **Frontend Development**:
+- **Frontend**: The Vite dev server runs on `https://localhost:5173` with hot module replacement
+- **Backend**: The .NET API runs on `https://localhost:5001` (or similar)
+- **API Explorer**: Available at `/swagger`
 
-  - Work with Vue components in the `ClientApp/src` directory
-  - The development server supports hot-reload for instant feedback
+### Troubleshooting
 
-- **Backend Development**:
-  - Controllers and services are in the `.Server` project
-  - API endpoints are automatically reloaded when you make changes
+1. **Database Issues**
 
-### Building for Production
+   - **Windows**: Ensure SQL Server LocalDB is installed (comes with Visual Studio)
+   - **Mac/Linux**: Ensure write permissions to the `App_Data` directory
 
-To create a production build:
+2. **Reset the Database**
 
-1. In Visual Studio:
+   - **Windows**:
+     - Delete the database using SQL Server Management Studio or run `sqllocaldb delete MSSQLLocalDB`
+     - Delete `App_Data/app.db`
+   - **Mac/Linux**: Delete the `App_Data` directory
 
-   - Right-click the solution
-   - Select "Publish..."
-   - Choose your publishing target (Azure, Folder, etc.)
-   - Follow the wizard to complete the publish process
-
-2. Or from the command line:
-   ```
-   cd ClientApp
-   npm run build
-   dotnet publish -c Release
-   ```
+3. **Port Conflicts**
+   - If ports 5001 or 5173 are in use, update the ports in:
+     - `Properties/launchSettings.json` (backend)
+     - `ClientApp/vite.config.ts` (frontend)
 
 ---
 
-## Original Template Information
+## Project Structure
 
-This project was created using the vue-spa template:
+- `ClientApp/` - Vue 3 frontend with Vite
+- `MyApp/` - .NET 8 backend
+  - `ServiceModel/` - Request/response DTOs
+  - `ServiceInterface/` - Service implementations
+  - `Migrations/` - Database migrations
 
-# vue-spa
+## License
 
-.NET 8.0 vue-spa Pages Tailwind Website
-
-[![](https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/vue-spa.png)](http://vue-spa.web-templates.io)
-
-> Browse [source code](https://github.com/NetCoreTemplates/vue-spa), view live demo [vue-spa.web-templates.io](http://vue-spa.web-templates.io) and install with [dotnet-new](https://docs.servicestack.net/dotnet-new):
-
-    $ dotnet tool install -g x
-    $ x new vue-spa ProjectName
-
-Alternatively write new project files directly into an empty repository, using the Directory Name as the ProjectName:
-
-    $ git clone https://github.com/<User>/<ProjectName>.git
-    $ cd <ProjectName>
-    $ x new vue-spa
+This project is based on the [vue-spa](https://github.com/NetCoreTemplates/vue-spa) template which is licensed under the terms of the MIT license.
