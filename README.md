@@ -138,11 +138,62 @@ If the automatic setup doesn't work, you can manually set up the database:
 
 ## Project Structure
 
-- `ClientApp/` - Vue 3 frontend with Vite
-- `MyApp/` - .NET 8 backend
-  - `ServiceModel/` - Request/response DTOs
-  - `ServiceInterface/` - Service implementations
-  - `Migrations/` - Database migrations
+```
+tca-testing-tasks/
+├── MyApp/                     # .NET 8 Backend
+│   ├── App_Data/             # Database files and migrations
+│   │   └── README.md         # Database management guide
+│   ├── wwwroot/              # Static files (auto-populated)
+│   ├── ServiceInterface/     # Service implementations
+│   ├── ServiceModel/         # Request/Response DTOs and types
+│   │   └── Types/            # Shared DTOs and models
+│   │       └── README.md     # DTO documentation
+│   └── Program.cs            # Application entry point
+│
+├── MyApp.Client/            # Vue 3 Frontend
+│   ├── public/               # Static assets
+│   ├── src/                  # Source files
+│   └── README.md             # Frontend development guide
+│
+├── MyApp.ServiceInterface/  # Service implementations
+├── MyApp.ServiceModel/       # DTOs and service contracts
+├── MyApp.Tests/              # Unit and integration tests
+│
+├── .gitignore              # Git ignore rules
+└── README.md                # This file
+```
+
+### Key Directories
+
+- **MyApp/**: Backend .NET 8 application
+
+  - `App_Data/`: Database files and migrations (see [App_Data/README.md](MyApp/App_Data/README.md))
+  - `wwwroot/`: Static files served by the web server
+  - `ServiceInterface/`: Service implementations
+  - `ServiceModel/`: DTOs and service contracts (see [ServiceModel/Types/README.md](MyApp.ServiceModel/Types/README.md))
+
+- **MyApp.Client/**: Vue 3 frontend application (see [Client README.md](MyApp.Client/README.md))
+
+  - `public/`: Static assets
+  - `src/`: Vue components and application code
+
+- **MyApp.ServiceInterface/**: Contains service implementations
+- **MyApp.ServiceModel/**: Shared DTOs and contracts
+- **MyApp.Tests/**: Test projects
+
+## Development
+
+### Frontend Development
+
+See the [Client README](MyApp.Client/README.md) for frontend-specific setup and development instructions.
+
+### Backend Development
+
+See the [Database Management](MyApp/App_Data/README.md) guide for database setup and migrations.
+
+### API Development
+
+For API development, refer to the [ServiceModel Types](MyApp.ServiceModel/Types/README.md) documentation for DTO and contract guidelines.
 
 ## License
 
