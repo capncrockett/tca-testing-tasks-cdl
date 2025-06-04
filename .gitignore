@@ -112,3 +112,30 @@ appsettings.local.json
 
 # Local development cache
 .local-chromium/
+
+# Database
+App_Data/*
+!App_Data/.gitkeep
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE specific files
+.idea/
+.vscode/
+*.sln.iml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

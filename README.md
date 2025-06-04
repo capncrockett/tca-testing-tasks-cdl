@@ -51,15 +51,15 @@ The application uses two database systems:
 
    - Used for: Bookings, Coupons, etc.
    - Automatically created at `App_Data/app.db`
-   - No setup required
+   - For detailed database management instructions, see [App_Data/README.md](MyApp/App_Data/README.md)
 
 2. **Authentication (EF Core)**
    - **Windows**: Uses SQL Server LocalDB (included with Visual Studio)
    - **Mac/Linux**: Uses SQLite (no setup required)
 
-#### First Run
+#### First Run (Automatic Setup)
 
-On first run, the application will:
+On first run, the application will attempt to:
 
 1. Create the databases if they don't exist
 2. Run all necessary migrations
@@ -67,6 +67,33 @@ On first run, the application will:
    - Test users (admin@email.com / p@55wOrd)
    - Sample bookings
    - Coupon codes (5% to 70% off)
+
+#### Manual Database Setup
+
+If the automatic setup doesn't work, you can manually set up the database:
+
+1. **Navigate to the project directory**:
+
+   ```bash
+   cd /path/to/project/MyApp
+   ```
+
+2. **Create and apply migrations**:
+
+   ```bash
+   # List any pending migrations
+   dotnet ef migrations list
+
+   # If no migrations exist, create one
+   dotnet ef migrations add InitialCreate
+
+   # Apply migrations to create/update the database
+   dotnet ef database update
+   ```
+
+3. **Verify the database**:
+   - On Mac/Linux: An `app.db` file should be created in your project root
+   - The database should contain all necessary tables (AspNetUsers, AspNetRoles, etc.)
 
 ### Accessing the Admin UI
 
@@ -85,15 +112,22 @@ On first run, the application will:
 
 1. **Database Issues**
 
+   - **Automatic migration failed**: If the database isn't created automatically, follow the [manual database setup](MyApp/App_Data/README.md) instructions.
    - **Windows**: Ensure SQL Server LocalDB is installed (comes with Visual Studio)
-   - **Mac/Linux**: Ensure write permissions to the `App_Data` directory
+   - **Mac/Linux**: Ensure write permissions to the project directory
 
 2. **Reset the Database**
 
    - **Windows**:
      - Delete the database using SQL Server Management Studio or run `sqllocaldb delete MSSQLLocalDB`
      - Delete `App_Data/app.db`
-   - **Mac/Linux**: Delete the `App_Data` directory
+   - **Mac/Linux**:
+     ```bash
+     # Delete the database file
+     rm -f app.db
+     # Then re-run migrations
+     dotnet ef database update
+     ```
 
 3. **Port Conflicts**
    - If ports 5001 or 5173 are in use, update the ports in:
