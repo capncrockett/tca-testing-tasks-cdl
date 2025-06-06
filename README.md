@@ -67,22 +67,33 @@ A Vue.js and .NET 8.0 application for managing testing tasks, designed for Visua
 
 ### Database Setup
 
-Before running the application, you need to set up the local database:
+The application uses SQL Server for data storage. Database setup is fully automated:
 
-1. Open Visual Studio and navigate to **View → SQL Server Object Explorer**
-2. Expand **SQL Server → (localdb)\MSSQLLocalDB**
-3. Right-click on **Databases** and select **Add New Database**
-4. Enter **TcaTestingTasks** as the database name and click **OK**
-5. The application will handle table creation and schema setup automatically on first run
+1. On first run, the application will:
+   - Create the database if it doesn't exist
+   - Apply all migrations to create necessary tables
+   - Create default user accounts (admin, manager, employee, test)
 
-Note: The application uses LocalDB with Windows Authentication. Make sure your Windows user account has sufficient permissions.
+2. If you need to manually set up the database:
+   - Open Visual Studio and navigate to **View → SQL Server Object Explorer**
+   - Expand **SQL Server → (localdb)\MSSQLLocalDB**
+   - Right-click on **Databases** and select **Add New Database**
+   - Enter **TcaTestingTasks** as the database name and click **OK**
+
+3. To completely reset the database:
+   - Delete the database through SQL Server Object Explorer
+   - Restart the application - it will recreate everything automatically
+
+Note: The application uses SQL Server LocalDB with Windows Authentication. Make sure your Windows user account has sufficient permissions.
 
 ### Accessing the Admin UI
 
 1. Navigate to `/admin-ui/database` in your browser
-2. Log in with admin credentials:
-   - Email: `admin@email.com`
-   - Password: `p@55wOrd`
+2. Log in with one of these accounts (all with password `p@55wOrd`):
+   - Admin: `admin@email.com`
+   - Manager: `manager@email.com`
+   - Employee: `employee@email.com`
+   - Test: `test@email.com`
 
 ### Development Workflow
 
