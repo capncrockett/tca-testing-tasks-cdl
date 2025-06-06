@@ -43,46 +43,45 @@ public class ConfigureDbMigrations : IHostingStartup
             
             AppTasks.Register("migrate.revert", args => migrator.Revert(args[0]));
             
+            // Add a dedicated command to recreate all users
+            AppTasks.Register("migrate.users", _ =>
+            {
+                var log = appHost.GetApplicationServices().GetRequiredService<ILogger<ConfigureDbMigrations>>();
+                log.LogInformation("Force recreating all users...");
+                
+                // Create a scope to resolve scoped services like ApplicationDbContext
+                var scopeFactory = appHost.GetApplicationServices().GetRequiredService<IServiceScopeFactory>();
+                using (var scope = scopeFactory.CreateScope())
+                {
+                    EnsureAllUsersExist(scope.ServiceProvider, true).Wait();
+                }
+                
+                log.LogInformation("User recreation complete.");
+            });
+            
             // Run on startup - check if database needs initialization and users need to be created
             appHost.AfterInitCallbacks.Add(host => 
             {
                 var log = host.GetApplicationServices().GetRequiredService<ILogger<ConfigureDbMigrations>>();
-                log.LogInformation("Checking database and users on startup...");
                 
-                try 
+                try
                 {
+                    // Create a scope to resolve scoped services
                     var scopeFactory = host.GetApplicationServices().GetRequiredService<IServiceScopeFactory>();
                     using (var scope = scopeFactory.CreateScope())
                     {
-                        using var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                        
-                        // Try to check if the database has been initialized
-                        bool shouldInitDb = false;
-                        try
+                        // Run migrations first
+                        using (var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                         {
-                            // Check if we have users table with any users
-                            shouldInitDb = !db.Users.Any();
-                        }
-                        catch (Exception ex)
-                        {
-                            // If we can't query, the database likely needs initialization
-                            log.LogInformation("Database check failed, needs initialization: {Message}", ex.Message);
-                            shouldInitDb = true;
-                        }
-                        
-                        if (shouldInitDb)
-                        {
-                            log.LogInformation("Initializing database and creating users...");
-                            
-                            // Ensure database exists and schema is created
-                            db.Database.EnsureCreated();
+                            log.LogInformation("Running EF Core Migrations...");
                             db.Database.Migrate();
                             
-                            // Run OrmLite migrations
-                            migrator.Run();
+                            log.LogInformation("Database is ready. Checking if user seeding is needed...");
                             
-                            // Create all users
-                            EnsureAllUsersExist(host.GetApplicationServices()).Wait();
+                            // Always create all users on startup to ensure they work
+                            // This will only recreate users if their credentials don't work in SQL Server
+                            log.LogInformation("Running user seeding to ensure all users exist with valid credentials...");
+                            EnsureAllUsersExist(scope.ServiceProvider, true).Wait();
                         }
                     }
                 }
@@ -96,7 +95,7 @@ public class ConfigureDbMigrations : IHostingStartup
         });
         
     // Helper method to create all users
-    private async Task EnsureAllUsersExist(IServiceProvider services)
+    private async Task EnsureAllUsersExist(IServiceProvider services, bool forceRecreate = false)
     {
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
@@ -120,7 +119,7 @@ public class ConfigureDbMigrations : IHostingStartup
             ("admin@email.com", "Admin User", "Admin", "User", "p@55wOrd", null, allRoles),
             ("manager@email.com", "Test Manager", "Test", "Manager", "p@55wOrd", "/img/profiles/user3.svg", new[] { Roles.Manager, Roles.Employee }),
             ("employee@email.com", "Test Employee", "Test", "Employee", "p@55wOrd", "/img/profiles/user2.svg", new[] { Roles.Employee }),
-            ("test@email.com", "Test User", "Test", "User", "p@55wOrd", "/img/profiles/user1.svg", Array.Empty<string>())
+            ("new@user.com", "Test User", "Test", "User", "p@55wOrd", "/img/profiles/user1.svg", Array.Empty<string>())
         };
         
         // Process each user - completely recreate them to ensure they work
@@ -130,42 +129,47 @@ public class ConfigureDbMigrations : IHostingStartup
             {
                 // Delete if exists
                 var existingUser = await userManager.FindByEmailAsync(email);
-                if (existingUser != null)
+                if (existingUser != null && (forceRecreate || !existingUser.EmailConfirmed))
                 {
                     logger.LogInformation("Removing existing user: {Email}", email);
                     await userManager.DeleteAsync(existingUser);
+                    existingUser = null; // Mark as deleted so we recreate it below
                 }
                 
-                // Create fresh user
-                var user = new ApplicationUser
+                // Create user if it doesn't exist or was deleted above
+                if (existingUser == null)
                 {
-                    UserName = email,
-                    Email = email,
-                    DisplayName = displayName,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    ProfileUrl = profileUrl,
-                    EmailConfirmed = true
-                };
-                
-                logger.LogInformation("Creating user: {Email}", email);
-                var result = await userManager.CreateAsync(user, password);
-                
-                if (result.Succeeded)
-                {
-                    logger.LogInformation("Successfully created user: {Email}", email);
-                    
-                    // Add roles
-                    if (roles.Length > 0)
+                    // Create fresh user
+                    var user = new ApplicationUser
                     {
-                        await userManager.AddToRolesAsync(user, roles);
-                        logger.LogInformation("Added roles to {Email}: {Roles}", email, string.Join(", ", roles));
+                        UserName = email,
+                        Email = email,
+                        DisplayName = displayName,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        ProfileUrl = profileUrl,
+                        EmailConfirmed = true
+                    };
+                    
+                    logger.LogInformation("Creating user: {Email}", email);
+                    var result = await userManager.CreateAsync(user, password);
+                    
+                    if (result.Succeeded)
+                    {
+                        logger.LogInformation("Successfully created user: {Email}", email);
+                        
+                        // Add roles
+                        if (roles.Length > 0)
+                        {
+                            await userManager.AddToRolesAsync(user, roles);
+                            logger.LogInformation("Added roles to {Email}: {Roles}", email, string.Join(", ", roles));
+                        }
                     }
-                }
-                else
-                {
-                    logger.LogError("Failed to create user {Email}: {Errors}", 
-                        email, string.Join(", ", result.Errors.Select(e => e.Description)));
+                    else
+                    {
+                        logger.LogError("Failed to create user {Email}: {Errors}", 
+                            email, string.Join(", ", result.Errors.Select(e => e.Description)));
+                    }
                 }
             }
             catch (Exception ex)

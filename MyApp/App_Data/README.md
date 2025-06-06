@@ -24,7 +24,7 @@ The following user accounts are automatically created with password `p@55wOrd`:
 - **Admin**: admin@email.com (has all roles: Admin, Manager, Employee)
 - **Manager**: manager@email.com (has Manager and Employee roles)
 - **Employee**: employee@email.com (has Employee role)
-- **Test**: test@email.com (has no special roles)
+- **Test**: new@user.com (has no special roles)
 
 ### Note
 

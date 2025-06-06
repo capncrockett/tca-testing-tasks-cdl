@@ -10,11 +10,11 @@
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
     <RootNamespace>MyApp</RootNamespace>
     <PublishProfile>DefaultContainer</PublishProfile>
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <ContainerLabel Include="service" Value="my-app" />
-    </ItemGroup>
+  <ItemGroup>
+    <ContainerLabel Include="service" Value="my-app" />
+  </ItemGroup>
 
   <ItemGroup>
     <Using Include="MyApp" />
@@ -61,6 +61,5 @@
     </ItemGroup>
     <Copy SourceFiles="@(CopyDist)" DestinationFiles="@(CopyDist->'$(PublishDir)wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
-
 
 </Project>

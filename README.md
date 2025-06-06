@@ -72,7 +72,7 @@ The application uses SQL Server for data storage. Database setup is fully automa
 1. On first run, the application will:
    - Create the database if it doesn't exist
    - Apply all migrations to create necessary tables
-   - Create default user accounts (admin, manager, employee, test)
+   - Create default user accounts (admin, manager, employee, new user)
 
 2. If you need to manually set up the database:
    - Open Visual Studio and navigate to **View → SQL Server Object Explorer**
@@ -84,6 +84,10 @@ The application uses SQL Server for data storage. Database setup is fully automa
    - Delete the database through SQL Server Object Explorer
    - Restart the application - it will recreate everything automatically
 
+4. If you need to recreate all users with fresh passwords:
+   - Run the command: `dotnet run -- migrate.users`
+   - This will recreate all user accounts with their default passwords
+
 Note: The application uses SQL Server LocalDB with Windows Authentication. Make sure your Windows user account has sufficient permissions.
 
 ### Accessing the Admin UI
@@ -93,7 +97,7 @@ Note: The application uses SQL Server LocalDB with Windows Authentication. Make 
    - Admin: `admin@email.com`
    - Manager: `manager@email.com`
    - Employee: `employee@email.com`
-   - Test: `test@email.com`
+   - Test: `new@user.com`
 
 ### Development Workflow
 
