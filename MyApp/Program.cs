@@ -35,19 +35,9 @@ services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserC
 // Register all services
 services.AddServiceStack(typeof(MyServices).Assembly);
 
-// Configure database based on OS
-var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-if (isWindows)
-{
-    services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
-}
-else
-{
-    // Add SQLite package if not already added: dotnet add package Microsoft.EntityFrameworkCore.Sqlite
-    services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
-}
+// Use SQL Server exclusively for this Visual Studio project
+services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
 var app = builder.Build();
 

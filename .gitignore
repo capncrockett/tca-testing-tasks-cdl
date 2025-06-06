@@ -101,8 +101,6 @@ lerna-debug.log*
 # Database files
 *.db
 *.db-journal
-*.sqlite
-*.sqlite3
 
 # Project specific ignores (delegated to project .gitignore files)
 # See individual project .gitignore files for more specific rules

@@ -4,17 +4,17 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
     <SpaRoot>..\MyApp.Client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
     <RootNamespace>MyApp</RootNamespace>
     <PublishProfile>DefaultContainer</PublishProfile>
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <ContainerLabel Include="service" Value="my-app" />
-    </ItemGroup>
+  <ItemGroup>
+    <ContainerLabel Include="service" Value="my-app" />
+  </ItemGroup>
 
   <ItemGroup>
     <Using Include="MyApp" />
@@ -25,17 +25,16 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.*" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.*" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.16">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.*" />
     <PackageReference Include="ServiceStack" Version="8.*" />
     <PackageReference Include="ServiceStack.Server" Version="8.*" />
     <PackageReference Include="ServiceStack.Jobs" Version="8.*" />
-    <PackageReference Include="ServiceStack.Ormlite.Sqlite.Data" Version="8.*" />
+    <PackageReference Include="ServiceStack.OrmLite.SqlServer" Version="8.*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +61,5 @@
     </ItemGroup>
     <Copy SourceFiles="@(CopyDist)" DestinationFiles="@(CopyDist->'$(PublishDir)wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
-
 
 </Project>

@@ -67,42 +67,37 @@ A Vue.js and .NET 8.0 application for managing testing tasks, designed for Visua
 
 ### Database Setup
 
-The application uses SQL Server LocalDB for all database needs:
+The application uses SQL Server for data storage. Database setup is fully automated:
 
-- **Application Data (OrmLite with SQL Server LocalDB)**
-  - Used for: Bookings, Coupons, etc.
-  - Automatically created on first run
+1. On first run, the application will:
+   - Create the database if it doesn't exist
+   - Apply all migrations to create necessary tables
+   - Create default user accounts (admin, manager, employee, new user)
 
-- **Authentication (EF Core with SQL Server LocalDB)**
-  - Used for user authentication and authorization
+2. If you need to manually set up the database:
+   - Open Visual Studio and navigate to **View → SQL Server Object Explorer**
+   - Expand **SQL Server → (localdb)\MSSQLLocalDB**
+   - Right-click on **Databases** and select **Add New Database**
+   - Enter **TcaTestingTasks** as the database name and click **OK**
 
-#### First Run (Automatic Setup)
+3. To completely reset the database:
+   - Delete the database through SQL Server Object Explorer
+   - Restart the application - it will recreate everything automatically
 
-On first run, the application will:
-1. Create the databases if they don't exist
-2. Run all necessary migrations
-3. Seed sample data including:
-   - Test users (admin@email.com / p@55wOrd)
-   - Sample bookings
-   - Coupon codes (5% to 70% off)
+4. If you need to recreate all users with fresh passwords:
+   - Run the command: `dotnet run -- migrate.users`
+   - This will recreate all user accounts with their default passwords
 
-#### Manual Database Setup
-
-If the automatic setup doesn't work, you can manually set up the database:
-
-1. **Open Package Manager Console** in Visual Studio (Tools > NuGet Package Manager > Package Manager Console)
-2. **Run migrations**:
-   ```powershell
-   Update-Database
-   ```
-3. **Verify the database** in SQL Server Object Explorer (View > SQL Server Object Explorer)
+Note: The application uses SQL Server LocalDB with Windows Authentication. Make sure your Windows user account has sufficient permissions.
 
 ### Accessing the Admin UI
 
 1. Navigate to `/admin-ui/database` in your browser
-2. Log in with admin credentials:
-   - Email: `admin@email.com`
-   - Password: `p@55wOrd`
+2. Log in with one of these accounts (all with password `p@55wOrd`):
+   - Admin: `admin@email.com`
+   - Manager: `manager@email.com`
+   - Employee: `employee@email.com`
+   - Test: `new@user.com`
 
 ### Development Workflow
 
