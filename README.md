@@ -67,35 +67,15 @@ A Vue.js and .NET 8.0 application for managing testing tasks, designed for Visua
 
 ### Database Setup
 
-The application uses SQL Server LocalDB for all database needs:
+Before running the application, you need to set up the local database:
 
-- **Application Data (OrmLite with SQL Server LocalDB)**
-  - Used for: Bookings, Coupons, etc.
-  - Automatically created on first run
+1. Open Visual Studio and navigate to **View → SQL Server Object Explorer**
+2. Expand **SQL Server → (localdb)\MSSQLLocalDB**
+3. Right-click on **Databases** and select **Add New Database**
+4. Enter **TcaTestingTasks** as the database name and click **OK**
+5. The application will handle table creation and schema setup automatically on first run
 
-- **Authentication (EF Core with SQL Server LocalDB)**
-  - Used for user authentication and authorization
-
-#### First Run (Automatic Setup)
-
-On first run, the application will:
-1. Create the databases if they don't exist
-2. Run all necessary migrations
-3. Seed sample data including:
-   - Test users (admin@email.com / p@55wOrd)
-   - Sample bookings
-   - Coupon codes (5% to 70% off)
-
-#### Manual Database Setup
-
-If the automatic setup doesn't work, you can manually set up the database:
-
-1. **Open Package Manager Console** in Visual Studio (Tools > NuGet Package Manager > Package Manager Console)
-2. **Run migrations**:
-   ```powershell
-   Update-Database
-   ```
-3. **Verify the database** in SQL Server Object Explorer (View > SQL Server Object Explorer)
+Note: The application uses LocalDB with Windows Authentication. Make sure your Windows user account has sufficient permissions.
 
 ### Accessing the Admin UI
 
