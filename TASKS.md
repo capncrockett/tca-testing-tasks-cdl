@@ -1,12 +1,14 @@
 # Code Assistants Testing Tasks: Week 1
 
-June 3, 2025
+June 9, 2025
 
 ## Overview
 
-This document contains the setups involved in pulling down the synthetic repository, running your code assistants against it, and pushing it back up with edits. It also contains a list of proposed tasks with some tips and tricks attached, but developers are welcome to get creative!
+This document contains a list of proposed testing tasks with helpful resources included at the end.
 
 We will use the code in your pull requests to drive a broader conversation about how the AI agents performed and compare the different implementations developers generated with their tools. This is not a code review; in fact, we encourage you to commit and call out any specifically poor, non-functional, or hallucinated code! This will help us drive a broader conversation about how to use, prompt, review, and commit code from agents responsibly.
+
+**Please refer to the task number when taking notes on your testing experience.**
 
 ## Task 1: Documentation Enhancement
 
@@ -14,8 +16,6 @@ We will use the code in your pull requests to drive a broader conversation about
 - To improve the model's output, try passing it an example showing the format you want to use.
 - Include examples of what kinds of information you want in the documentation.
 - Try using the `/doc` slash command and compare it with chat-based documentation.
-  - See the [GitHub Copilot Cheat Sheet](https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/github-copilot-chat-cheat-sheet)
-  - Example video: [Using /doc command](https://www.youtube.com/shorts/vZSf9F-S_aA)
 
 ## Task 2: Unit Testing with NUnit
 
@@ -23,7 +23,6 @@ We will use the code in your pull requests to drive a broader conversation about
 - Generate tests with mock services where appropriate.
 - Start by asking the model to strategize: "How would you implement unit testing in this project with mocked services?"
 - Ask the assistant to critique its own work.
-- For beginners: [Setting up NUnit with Copilot](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-copilot)
 
 ## Task 3: Frontend Styling and UI Improvements
 
@@ -56,17 +55,17 @@ We will use the code in your pull requests to drive a broader conversation about
 
 ## Extra Credit Tasks
 
-1. **Frontend Testing Setup**
+**Extra Credit Task 1: Frontend Testing Setup**
 
    - Set up a testing framework for the Vue.js frontend (e.g., Vitest or Jest)
    - Add example tests for Vue components
 
-2. **Integration Testing**
+**Extra Credit Task 2: Integration Testing**
 
    - Add integration tests that test multiple components working together
    - Example: Test the complete flow of a user making a booking
 
-3. **Code Quality**
+**Extra Credit Task 3: Code Quality**
    - Run a code quality analysis and address any issues found
    - Example: Use built-in IDE tools to identify code smells or potential bugs
 
@@ -74,18 +73,22 @@ We will use the code in your pull requests to drive a broader conversation about
 
 ### Copilot
 
-- [GitHub Copilot documentation](https://docs.github.com/en/copilot)
-- [Visual Studio specific documentation](https://docs.github.com/en/copilot/configuring-github-copilot/configuring-github-copilot-in-visual-studio)
-- [Generating unit tests with Copilot](https://github.blog/2023-02-27-how-to-write-unit-tests-with-github-copilot/)
-- [GitHub Copilot Cheat Sheet](https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/github-copilot-chat-cheat-sheet)
-- [Using /doc command video](https://www.youtube.com/shorts/vZSf9F-S_aA)
+- General
+  - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+  - [Best Practices for Using GitHub Copilot](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
+  - [GitHub Copilot Command Cheat Sheet](https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/github-copilot-chat-cheat-sheet)
+  - [Add Repository Custom Instructions to Copilot](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot)
+- Using Copilot in Visual Studio
+  - [Configuring Copilot in Visual Studio](https://docs.github.com/en/copilot/managing-copilot/configure-personal-settings/configuring-github-copilot-in-your-environment)
+  - [Asking Questions in Visual Studio](https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/asking-github-copilot-questions-in-your-ide)
+- Using Copilot for Unit Testing
+  - [Generating Unit Tests with Copilot](https://github.blog/ai-and-ml/github-copilot/how-to-generate-unit-tests-with-github-copilot-tips-and-examples/) 
+  - [Generating Unit Tests in .NET with Copilot](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-copilot)
+
+
 
 ### Amazon Q
 
-- [Amazon Q for Visual Studio](https://docs.aws.amazon.com/amazonq/latest/developer-guide/ide-vs.html)
-- [Code Review with Amazon Q](https://docs.aws.amazon.com/amazonq/latest/developer-guide/use-code-review.html)
-
-### Testing Resources
-
-- [Microsoft Guide to Unit Testing](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-copilot)
-- [Deep dive into generating unit tests with Copilot](https://github.blog/2023-02-27-how-to-write-unit-tests-with-github-copilot/)
+- [Using Amazon Q in the IDE](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/q-in-IDE.html) 
+- [Using Inline Suggestions in Visual Studio](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/inline-suggestions.html)
+- [Run a Code Review with Q in Visual Studio](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/code-reviews.html)
