@@ -183,3 +183,4 @@ The backend is built with .NET 8. The solution can be opened and run directly in
 ## License
 
 This project is based on the [vue-spa](https://github.com/NetCoreTemplates/vue-spa) template which is licensed under the terms of the MIT license.
+
